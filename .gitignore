@@ -1,0 +1,15 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc    //esse aqui ja vai precisar
+.env.prod
+.env.dev
+.env.test
