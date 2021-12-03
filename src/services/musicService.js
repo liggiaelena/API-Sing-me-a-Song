@@ -9,7 +9,8 @@ function isYoutubeVideo(url) {
 async function addVote(id) {
   const score = await musicRepository.findScoreByMusicId(id);
   const newScore = score + 1;
-  await musicRepository.updateVote(id, newScore);
+  const music = await musicRepository.updateVote(id, newScore);
+  return music;
 }
 
 async function removeVote(id) {
@@ -17,9 +18,10 @@ async function removeVote(id) {
   const newScore = score - 1;
   if (newScore === -5) {
     await musicRepository.deleteSong(id);
-    return;
+    return null;
   }
-  await musicRepository.updateVote(id, newScore);
+  const music = await musicRepository.updateVote(id, newScore);
+  return music;
 }
 
 async function getRandomMusic() {

@@ -39,9 +39,10 @@ async function findScoreByMusicId(id) {
 }
 
 async function updateVote(id, newScore) {
-  await connection.query(`
-    UPDATE scores SET score = $2 WHERE music_id = $1;
+  const music = await connection.query(`
+    UPDATE scores SET score = $2 WHERE music_id = $1 RETURNING *;
   `, [id, newScore]);
+  return music.rows[0];
 }
 
 async function deleteSong(id) {
