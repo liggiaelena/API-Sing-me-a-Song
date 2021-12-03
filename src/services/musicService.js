@@ -6,11 +6,6 @@ function isYoutubeVideo(url) {
   return !!isValid;
 }
 
-async function isValidSong(id) {
-  const result = await musicRepository.findSongById(id);
-  return result;
-}
-
 async function addVote(id) {
   const score = await musicRepository.findScoreByMusicId(id);
   const newScore = score + 1;
@@ -25,11 +20,6 @@ async function removeVote(id) {
     return;
   }
   await musicRepository.updateVote(id, newScore);
-}
-
-async function getTopMusics(amount) {
-  const musics = await musicRepository.getTopMusics(amount);
-  return musics;
 }
 
 async function getRandomMusic() {
@@ -55,9 +45,7 @@ async function getRandomMusic() {
 
 export {
   isYoutubeVideo,
-  isValidSong,
   addVote,
   removeVote,
-  getTopMusics,
   getRandomMusic,
 };

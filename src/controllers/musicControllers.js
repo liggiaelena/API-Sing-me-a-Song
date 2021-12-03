@@ -47,7 +47,7 @@ async function addVote(req, res) {
   }
 
   try {
-    const exist = await musicService.isValidSong(id);
+    const exist = await musicRepository.findSongById(id);
     if (!exist) {
       res.sendStatus(404);
       return;
@@ -92,7 +92,7 @@ async function getTopMusics(req, res) {
   }
 
   try {
-    const musics = await musicService.getTopMusics(amount);
+    const musics = await musicRepository.getTopMusics(amount);
     res.status(200).send(musics);
   } catch (error) {
     res.sendStatus(500);
