@@ -1,5 +1,6 @@
 import { musicValidation, amountValidation } from '../validations/musicSchema.js';
 import * as musicService from '../services/musicService.js';
+import * as musicRepository from '../repositories/musicRepository.js';
 
 async function addMusic(req, res) {
   const {
@@ -22,7 +23,14 @@ async function addMusic(req, res) {
       return;
     }
 
-    await musicService.addMusic(name, youtubeLink);
+    const alreadyExistName = await musicRepository.findSongByName(name);
+    const alreadyExistUrl = await musicRepository.findSongByYoutubeLink(youtubeLink);
+
+    if (alreadyExistName || alreadyExistUrl) {
+      res.sendStatus(409);
+    }
+
+    await musicRepository.addMusic(name, youtubeLink);
 
     res.sendStatus(201);
   } catch (error) {

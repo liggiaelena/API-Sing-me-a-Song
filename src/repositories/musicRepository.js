@@ -10,6 +10,20 @@ async function addMusic(name, youtubeLink) {
   `, [music.rows[0].id, 0]);
 }
 
+async function findSongByName(name) {
+  const song = await connection.query(`
+    SELECT * FROM musics WHERE name = $1;
+  `, [name]);
+  return (!!song.rows[0]);
+}
+
+async function findSongByYoutubeLink(url) {
+  const song = await connection.query(`
+    SELECT * FROM musics WHERE youtube_link = $1;
+  `, [url]);
+  return (!!song.rows[0]);
+}
+
 async function findSongById(id) {
   const song = await connection.query(`
     SELECT * FROM musics WHERE id = $1;
@@ -61,6 +75,8 @@ async function getAllMusics() {
 
 export {
   addMusic,
+  findSongByName,
+  findSongByYoutubeLink,
   findSongById,
   findScoreByMusicId,
   updateVote,

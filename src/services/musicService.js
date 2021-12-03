@@ -6,10 +6,6 @@ function isYoutubeVideo(url) {
   return !!isValid;
 }
 
-async function addMusic(name, youtubeLink) {
-  await musicRepository.addMusic(name, youtubeLink);
-}
-
 async function isValidSong(id) {
   const result = await musicRepository.findSongById(id);
   return result;
@@ -58,7 +54,6 @@ async function getRandomMusic() {
 }
 
 export {
-  addMusic,
   isYoutubeVideo,
   isValidSong,
   addVote,
