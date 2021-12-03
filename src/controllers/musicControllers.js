@@ -90,9 +90,19 @@ async function getTopMusics(req, res) {
   }
 }
 
+async function getRandomMusic(req, res) {
+  try {
+    const music = await musicService.getRandomMusic();
+    res.status(200).send(music);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
+
 export {
   addMusic,
   addVote,
   removeVote,
   getTopMusics,
+  getRandomMusic,
 };

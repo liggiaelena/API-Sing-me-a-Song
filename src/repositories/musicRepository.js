@@ -50,6 +50,15 @@ async function getTopMusics(amount) {
   return musics.rows;
 }
 
+async function getAllMusics() {
+  const musics = await connection.query(`
+  SELECT musics.*, scores.score FROM musics 
+    JOIN scores
+      ON musics.id = scores.music_id;
+  `);
+  return musics.rows;
+}
+
 export {
   addMusic,
   findSongById,
@@ -57,4 +66,5 @@ export {
   updateVote,
   deleteSong,
   getTopMusics,
+  getAllMusics,
 };

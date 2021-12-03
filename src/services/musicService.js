@@ -36,6 +36,27 @@ async function getTopMusics(amount) {
   return musics;
 }
 
+async function getRandomMusic() {
+  const aux = parseInt(Math.random() * (11 - 0), 10);
+  const musics = await musicRepository.getAllMusics();
+
+  const musicsWithGreatScores = musics.filter((m) => m.score >= 10);
+  const musicsUntilScore10 = musics.filter((m) => m.score <= 10);
+
+  if (musicsWithGreatScores.length === 0 || musicsUntilScore10.length === 0) {
+    const index = Math.floor(Math.random() * musics.length);
+    return musics[index];
+  }
+
+  if (aux <= 7) {
+    const index = Math.floor(Math.random() * musicsWithGreatScores.length);
+    return musicsWithGreatScores[index];
+  }
+
+  const index = Math.floor(Math.random() * musicsUntilScore10.length);
+  return musicsUntilScore10[index];
+}
+
 export {
   addMusic,
   isYoutubeVideo,
@@ -43,4 +64,5 @@ export {
   addVote,
   removeVote,
   getTopMusics,
+  getRandomMusic,
 };
