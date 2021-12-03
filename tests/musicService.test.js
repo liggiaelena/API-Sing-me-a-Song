@@ -25,7 +25,7 @@ const musicsWhitGreatScores = [{
   id: 10,
   name: 'Patricia Romania - Apaixonado',
   youtube_link: 'https://www.youtube.com/',
-  score: 10,
+  score: 11,
 }];
 
 describe('Music Service', () => {
