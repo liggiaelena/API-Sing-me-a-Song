@@ -1,4 +1,4 @@
-import { musicValidation } from '../validations/musicSchema.js';
+import { musicValidation, amountValidation } from '../validations/musicSchema.js';
 import * as musicService from '../services/musicService.js';
 
 async function addMusic(req, res) {
@@ -77,7 +77,8 @@ async function removeVote(req, res) {
 async function getTopMusics(req, res) {
   const { amount } = req.params;
 
-  if (!amount || !Number(amount)) {
+  const validation = amountValidation.validate(Number(amount));
+  if (validation.error) {
     res.sendStatus(400);
     return;
   }

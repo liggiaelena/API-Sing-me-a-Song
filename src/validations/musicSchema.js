@@ -5,6 +5,9 @@ const musicValidation = Joi.object({
   youtubeLink: Joi.string().required(),
 });
 
-export{
-    musicValidation,
-}
+const amountValidation = Joi.number().positive().required();
+
+export {
+  musicValidation,
+  amountValidation,
+};
