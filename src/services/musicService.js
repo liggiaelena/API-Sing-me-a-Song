@@ -31,9 +31,10 @@ async function removeVote(id) {
   await musicRepository.updateVote(id, newScore);
 }
 
-// async function getTopMusics(amount){
-
-// }
+async function getTopMusics(amount) {
+  const musics = await musicRepository.getTopMusics(amount);
+  return musics;
+}
 
 export {
   addMusic,

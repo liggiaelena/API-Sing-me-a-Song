@@ -74,25 +74,25 @@ async function removeVote(req, res) {
   }
 }
 
-// async function getTopMusics(req, res) {
-//   const { amount } = req.params;
+async function getTopMusics(req, res) {
+  const { amount } = req.params;
 
-//   if (!amount || !Number(amount)) {
-//     res.sendStatus(400);
-//     return;
-//   }
+  if (!amount || !Number(amount)) {
+    res.sendStatus(400);
+    return;
+  }
 
-//   try {
-//     const musics = await musicService.getTopMusics(amount);
-//     console.log(musics);
-//   } catch (error) {
-//     console.log(error);
-//     res.sendStatus(500);
-//   }
-// }
+  try {
+    const musics = await musicService.getTopMusics(amount);
+    res.status(200).send(musics);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
 
 export {
   addMusic,
   addVote,
   removeVote,
+  getTopMusics,
 };

@@ -39,10 +39,22 @@ async function deleteSong(id) {
   `, [id]);
 }
 
+async function getTopMusics(amount) {
+  const musics = await connection.query(`
+  SELECT musics.*, scores.score FROM musics 
+    JOIN scores
+      ON musics.id = scores.music_id
+    ORDER BY scores.score DESC 
+    LIMIT $1;
+  `, [amount]);
+  return musics.rows;
+}
+
 export {
   addMusic,
   findSongById,
   findScoreByMusicId,
   updateVote,
   deleteSong,
+  getTopMusics,
 };
