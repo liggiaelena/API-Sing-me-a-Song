@@ -10,6 +10,39 @@ async function addMusic(name, youtubeLink) {
   `, [music.rows[0].id, 0]);
 }
 
-export{
-    addMusic,
+async function findSongById(id) {
+  const song = await connection.query(`
+    SELECT * FROM musics WHERE id = $1;
+  `, [id]);
+  return (song.rows[0]?.id || false);
 }
+
+async function findScoreByMusicId(id) {
+  const song = await connection.query(`
+    SELECT * FROM scores WHERE music_id = $1;
+  `, [id]);
+  return (song.rows[0].score);
+}
+
+async function updateVote(id, newScore) {
+  await connection.query(`
+    UPDATE scores SET score = $2 WHERE music_id = $1;
+  `, [id, newScore]);
+}
+
+async function deleteSong(id) {
+  await connection.query(`
+    DELETE FROM scores WHERE music_id = $1;
+  `, [id]);
+  await connection.query(`
+    DELETE FROM musics WHERE id = $1;
+  `, [id]);
+}
+
+export {
+  addMusic,
+  findSongById,
+  findScoreByMusicId,
+  updateVote,
+  deleteSong,
+};

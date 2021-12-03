@@ -11,7 +11,8 @@ app.get('/health', (req, res) => {
 });
 
 app.post('/recommendations', musicControllers.addMusic);
-// app.post('/recommendations/:id/upvote', musicControllers.addVote);
-// app.post('/recommendations/:id/downvote', musicControllers.removeVote);
+app.post('/recommendations/:id/upvote', musicControllers.addVote);
+app.post('/recommendations/:id/downvote', musicControllers.removeVote);
+//app.get('/recommendations/top/:amount', musicControllers.getTopMusics);
 
 export default app;

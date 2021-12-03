@@ -12,12 +12,14 @@ async function addMusic(req, res) {
     res.status(400).send({
       message: validation.error.details[0].message,
     });
+    return;
   }
 
   try {
     const isValid = musicService.isYoutubeVideo(youtubeLink);
     if (!isValid) {
       res.sendStatus(404);
+      return;
     }
 
     await musicService.addMusic(name, youtubeLink);
@@ -28,16 +30,69 @@ async function addMusic(req, res) {
   }
 }
 
-// async function addVote(req, res) {
+async function addVote(req, res) {
+  const { id } = req.params;
 
-// }
+  if (!Number(id)) {
+    res.sendStatus(400);
+    return;
+  }
 
-// async function removeVote(req, res) {
+  try {
+    const exist = await musicService.isValidSong(id);
+    if (!exist) {
+      res.sendStatus(404);
+      return;
+    }
 
+    await musicService.addVote(id);
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
+
+async function removeVote(req, res) {
+  const { id } = req.params;
+
+  if (!Number(id)) {
+    res.sendStatus(400);
+    return;
+  }
+
+  try {
+    const exist = await musicService.isValidSong(id);
+    if (!exist) {
+      res.sendStatus(404);
+      return;
+    }
+
+    await musicService.removeVote(id);
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
+
+// async function getTopMusics(req, res) {
+//   const { amount } = req.params;
+
+//   if (!amount || !Number(amount)) {
+//     res.sendStatus(400);
+//     return;
+//   }
+
+//   try {
+//     const musics = await musicService.getTopMusics(amount);
+//     console.log(musics);
+//   } catch (error) {
+//     console.log(error);
+//     res.sendStatus(500);
+//   }
 // }
 
 export {
   addMusic,
-//   addVote,
-//   removeVote,
+  addVote,
+  removeVote,
 };
