@@ -14,7 +14,7 @@ async function findSongById(id) {
   const song = await connection.query(`
     SELECT * FROM musics WHERE id = $1;
   `, [id]);
-  return (song.rows[0]?.id || false);
+  return (!!song.rows[0]);
 }
 
 async function findScoreByMusicId(id) {
