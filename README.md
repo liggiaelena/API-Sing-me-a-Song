@@ -20,7 +20,10 @@
   <img height="35em" src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"/>
   </div>
   
-  ## How ti run:
+  ## Deploy:
+  Heroku: https://sing-me-a-song-liggiaelena.herokuapp.com
+  
+  ## How to run:
  
  instalar as depedencias 
 ``` bash 
