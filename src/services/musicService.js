@@ -16,7 +16,7 @@ async function addVote(id) {
 async function removeVote(id) {
   const score = await musicRepository.findScoreByMusicId(id);
   const newScore = score - 1;
-  if (newScore === -5) {
+  if (newScore < -5) {
     await musicRepository.deleteSong(id);
     return null;
   }

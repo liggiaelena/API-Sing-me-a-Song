@@ -69,7 +69,7 @@ async function removeVote(req, res) {
   }
 
   try {
-    const exist = await musicService.isValidSong(id);
+    const exist = await musicRepository.findSongById(id);
     if (!exist) {
       res.sendStatus(404);
       return;
