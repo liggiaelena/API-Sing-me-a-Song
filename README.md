@@ -33,7 +33,9 @@ caso queira rodar no heruko
 ``` bash 
 npm run start 
 ```
-caso queira rodar na sua maquina
+Para rodar na sua maquina, crie o banco de dados:
+dump.sql 
+e rode o comando
 ``` bash 
 npm run start:dev 
 ```
