@@ -21,6 +21,20 @@
   </div>
   
   ## How ti run:
+ 
+ instalar as depedencias 
 ``` bash 
-git clone
+npm i 
+```
+caso queira rodar no heruko
+``` bash 
+npm run start 
+```
+caso queira rodar na sua maquina
+``` bash 
+npm run start:dev 
+```
+Para rodar os teste
+``` bash 
+npm run test
 ```
